@@ -1,0 +1,16 @@
+{
+  "schemaVersion": "1.3",
+  "key": "cakesec-poc-addon-alpha2",
+  "name": "CakeSec PoC",
+  "description": "Security test add-on (private, own workspace only)",
+  "baseUrl": "https://ATTACKER-HOST",
+  "iconPath": "/icon.svg",
+  "minimalSubscriptionPlan": "FREE",
+  "scopes": [],
+  "components": [
+    {"type": "sidebar", "accessLevel": "EVERYONE", "path": "/addon_component.html",
+     "label": "CakeSec PoC", "iconPath": "/icon.svg"}
+  ],
+  "lifecycle": [{"type": "INSTALLED", "path": "/lifecycle_installed"}],
+  "webhooks": []
+}

